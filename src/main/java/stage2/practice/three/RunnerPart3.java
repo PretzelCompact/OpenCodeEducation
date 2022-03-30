@@ -215,6 +215,7 @@ public class RunnerPart3 implements Playable {
                     case "restore":
                         if(grid != null){
                             grid.restore();
+                            gridRec.setState(GridRecord.State.Initialized);
                             updateGridInDB(gridRec,grid,connection);
                             System.out.println("Сетка восстановлена");
                         } else{

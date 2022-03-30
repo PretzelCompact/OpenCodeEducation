@@ -45,12 +45,12 @@ public class Grid {
         return height;
     }
 
-    public boolean hasCell(Cell cell){
-        return Arrays.stream(cells)
-                .anyMatch(row -> Arrays.stream(row).anyMatch(c->c==cell));
-    }
-
     public int getDistance(Cell cell1, Cell cell2){
+        /*
+        Расстяние между двумя клетками.
+        Т.к. по диагонали ходить нельзя, то можно вычислить длину "уголка"
+         */
+
         int dx = Math.abs(cell1.getX()-cell2.getX());
         int dy = Math.abs(cell1.getY()-cell2.getY());
 
@@ -75,6 +75,11 @@ public class Grid {
     }
 
     public void restore() {
+        /*
+        Очистить сетку от маркеров поиска пути
+        (Кроме START и END)
+         */
+
         Arrays.stream(cells)
                 .forEach(row -> Arrays.stream(row)
                         .forEach(c -> {
@@ -83,11 +88,20 @@ public class Grid {
                         }));
     }
     public void clear(){
+        /*
+        Полностью опустошить сетку
+         */
+
         Arrays.stream(cells)
                 .forEach(row -> Arrays.stream(row)
                         .forEach(c->c.setState(Cell.State.EMPTY)));
     }
     public void initialize(){
+        /*
+        Делает из сетку полностью пустую за исключением
+        двух клеток (START и END), которые устанавливаются рандомно
+         */
+
         clear();
 
         var rnd = new Random(LocalDateTime.now().hashCode());

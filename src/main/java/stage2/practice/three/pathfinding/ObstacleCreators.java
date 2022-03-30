@@ -4,11 +4,21 @@ import java.time.LocalDateTime;
 import java.util.Random;
 
 public class ObstacleCreators {
+    /*
+    Класс, содержащий статичные методы, которые
+    создают препятствия внутри сетки
+     */
+
     private static void setObstacle(Grid grid, int x, int y){
         grid.setCellState(x, y, Cell.State.BLOCKED);
     }
 
     public static void lineScan(Grid grid, int maxLineLength){
+        /*
+        Пройти по горизонатальным рядам сетки через один
+        Установить пробелы и стены случайной длины (не больше maxLineLength)
+         */
+
         var rnd = new Random(LocalDateTime.now().hashCode());
 
         for(int i = 0; i < grid.getWidth(); i+=2){

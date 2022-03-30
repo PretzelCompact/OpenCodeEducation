@@ -8,6 +8,9 @@ import java.util.*;
 import java.util.function.Function;
 
 public class Pathfinders {
+    /*
+    Класс, содержащий статичные методы поиска пути
+     */
 
     private static void buildPathThroughPrevs(HashMap<Cell, Cell> prevMap, Cell startCell, Cell finishCell, Cell curCell){
         /*
@@ -22,6 +25,10 @@ public class Pathfinders {
         finishCell.setState(Cell.State.END);
     }
     private static void addNeighboursToCellContainer(Grid grid, Cell curCell, HashSet<Cell> checkedCells, ICellContainer container, HashMap<Cell, Cell> prevMap){
+        /*
+        Получить соседей клетки и добавить их в ICellContainer
+         */
+
         Arrays.stream(grid.getNeighbours(curCell))
                 .forEach(c ->{
                     if(!checkedCells.contains(c) && !container.contains(c)){
@@ -37,6 +44,11 @@ public class Pathfinders {
     }
 
     private static boolean findPathWithCellContainer(Grid grid, ICellContainer container, Cell startCell, Cell finishCell, Function<ICellContainer, Cell> func){
+        /*
+        Метод находит путь, используя структуру ICellContainer
+        В качестве функции извлечения из этого контейнера используется аргумент func
+         */
+
         container.add(startCell);
 
         var checkedCells = new HashSet<Cell>();
