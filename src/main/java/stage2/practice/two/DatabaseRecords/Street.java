@@ -11,6 +11,16 @@ public class Street implements DatabaseRecord {
     private long localityId;
 
     @Override
+    public Object clone(){
+        var other = new Street();
+        other.setKind(kind);
+        other.setLocalityId(localityId);
+        other.setName(name);
+        other.setId(id);
+        return other;
+    }
+
+    @Override
     public void readFromResultSet(ResultSet set) throws SQLException {
         id = set.getInt("id");
         name = set.getString("name");
@@ -46,7 +56,7 @@ public class Street implements DatabaseRecord {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

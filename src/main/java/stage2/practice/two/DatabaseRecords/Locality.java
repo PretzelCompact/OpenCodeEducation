@@ -14,6 +14,17 @@ public class Locality implements DatabaseRecord {
     private Date establishmentDate;
 
     @Override
+    public Object clone(){
+        var other = new Locality();
+        other.setId(id);
+        other.setEstablishmentDate(establishmentDate);
+        other.setKind(kind);
+        other.setName(name);
+        other.setPopulation(population);
+        other.setSquare(square);
+        return other;
+    }
+    @Override
     public void readFromResultSet(ResultSet set) throws SQLException {
         id = set.getInt("id");
         name = set.getString("name");

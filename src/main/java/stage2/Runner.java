@@ -1,6 +1,7 @@
 package stage2;
 
 import stage2.practice.one.RunnerPart1;
+import stage2.practice.three.RunnerPart3;
 import stage2.practice.two.RunnerPart2;
 import utils.Playable;
 
@@ -15,7 +16,7 @@ public class Runner implements utils.Playable {
 
         System.out.println("Stage2");
         while (true){
-            System.out.println("Введите номер части(1-2) или exit");
+            System.out.println("Введите номер части(1-3) или exit");
             try{
                 input = br.readLine();
             } catch (IOException e){
@@ -30,6 +31,9 @@ public class Runner implements utils.Playable {
                     break;
                 case "2":
                     next = new RunnerPart2();
+                    break;
+                case "3":
+                    next = new RunnerPart3();
                     break;
                 default:
                     break;

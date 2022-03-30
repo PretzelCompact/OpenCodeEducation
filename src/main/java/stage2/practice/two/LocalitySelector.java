@@ -19,21 +19,11 @@ public class LocalitySelector implements ILocalitySelector {
     }
 
     private List<Locality> getLocalities(ResultSet set) throws SQLException{
-        var list = new ArrayList<Locality>();
-        while(set.next()){
-            var loc = (Locality) DatabaseExtractor.extract(Locality.class, set);
-            list.add(loc);
-        }
-        return list;
+        return DatabaseExtractor.extractList(new Locality(), set);
     }
 
     private List<Street> getStreets(ResultSet set) throws SQLException{
-        var list = new ArrayList<Street>();
-        while(set.next()){
-            var street = (Street) DatabaseExtractor.extract(Street.class, set);
-            list.add(street);
-        }
-        return list;
+        return DatabaseExtractor.extractList(new Street(), set);
     }
 
     @Override
