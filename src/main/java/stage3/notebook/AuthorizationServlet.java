@@ -14,6 +14,9 @@ public class AuthorizationServlet extends HttpServlet {
         var username = req.getParameter("username");
         var session = SessionController.getInstance().getSession();
 
+        //Находим пользователя по имени
+        //Если не находится, то создаём нового
+
         var trans = session.beginTransaction();
         var hql = "from  User u where u.name=:username";
         var query = session.createQuery(hql, User.class)
@@ -34,6 +37,9 @@ public class AuthorizationServlet extends HttpServlet {
         var webSession = req.getSession();
         webSession.setAttribute("userId", user.getId());
         webSession.setAttribute("userName", user.getName());
+
+        //Находим все записки, о которых нужно напомнить
+        //(За час до истечения времени)
 
         session = SessionController.getInstance().getSession();
         var hqlRemind = "from Record r where r.userId=:userId and remind=true";

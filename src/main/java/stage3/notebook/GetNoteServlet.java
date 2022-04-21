@@ -21,6 +21,8 @@ public class GetNoteServlet extends HttpServlet {
         var session = SessionController.getInstance().getSession();
         var trans = session.beginTransaction();
 
+        //Находим запись по id или создаём новую запись
+
         Record record;
         if(id != null){
             record = session.get(Record.class, id);
@@ -33,12 +35,13 @@ public class GetNoteServlet extends HttpServlet {
 
         trans.commit();
 
+        //Если у этого пользователя нет доступа к данной записи, то выходим
         if(record.getUserId() != userId){
             getServletContext().getRequestDispatcher("/profile.jsp").forward(req,resp);
         }
 
+        //Передаём данные найденной записи в jsp
         req.setAttribute("recordId", record.getId());
-
         req.setAttribute("content", record.getContent());
         req.setAttribute("marked", String.valueOf(record.getMarked()));
         req.setAttribute("remind", String.valueOf(record.getRemind()));

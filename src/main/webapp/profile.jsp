@@ -6,7 +6,7 @@
 </head>
 
 <body>
-<h1>Profile of <%= request.getSession().getAttribute("userName") %> of <%= request.getSession().getAttribute("userId") %></h1>
+<h1>Profile of <%= request.getSession().getAttribute("userName") %> with UserId=<%= request.getSession().getAttribute("userId") %></h1>
 
 <form action="authorization.html">
     <input type="submit" value="Change user" />

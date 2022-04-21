@@ -7,7 +7,6 @@
         Object records = request.getAttribute("records");
 
         if(records!=null){
-        out.println("Found notes:<br/>");
         for(String id : records.toString().split(";")){
             out.println(
             "<tr>" +

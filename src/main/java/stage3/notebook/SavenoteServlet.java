@@ -30,6 +30,9 @@ public class SavenoteServlet extends HttpServlet {
             remindDate = new Timestamp(dateFormatter.parse(remindDateStr).getTime());
         } catch(Exception e) {}
 
+        //Создаёт запись, вставляем в неё параметры
+        //Затем сохраняем её в БД
+
         Record record = new Record();
         record.setId(recordId);
         record.setContent(content);
