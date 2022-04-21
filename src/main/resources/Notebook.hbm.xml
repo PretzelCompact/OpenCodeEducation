@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="stage3.notebook.User" table="USERS">
+        <cache usage = "read-write"/>
+        <id name="id" type="long" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="name" column="name" type="string" />
+    </class>
+
+    <class name="stage3.notebook.Record" table="RECORDS">
+        <id name="id" type="long" column="id">
+            <generator class="native"/>
+        </id>
+
+        <property name="userId" column="user_id" type="long"/>
+        <property name="content" column="content" type="string" />
+        <property name="marked" column="marked" type="boolean" />
+        <property name="remind" column="remind" type="boolean" />
+        <property name="createTime" column="create_time" type="java.sql.Timestamp" />
+        <property name="remindTime" column="remind_time" type="java.sql.Timestamp" />
+    </class>
+</hibernate-mapping>
