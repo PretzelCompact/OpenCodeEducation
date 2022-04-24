@@ -52,11 +52,13 @@ public class AuthorizationServlet extends HttpServlet {
             var sb = new StringBuilder();
             remindList.stream()
                     .forEach(r->{
-                        var recordTime = r.getRemindTime().toLocalDateTime();
-                        var nowTime = LocalDateTime.now();
-                        var dur = Duration.between(recordTime,nowTime);
-                        if(dur.toMinutes() <= 60)
-                            sb.append(";" + r.getId());
+                        if(r.getRemindTime() != null) {
+                            var recordTime = r.getRemindTime().toLocalDateTime();
+                            var nowTime = LocalDateTime.now();
+                            var dur = Duration.between(recordTime, nowTime);
+                            if (dur.toMinutes() <= 60)
+                                sb.append(";" + r.getId());
+                        }
                     });
             if(sb.length() > 0)
                 req.setAttribute("records", sb.substring(1));
