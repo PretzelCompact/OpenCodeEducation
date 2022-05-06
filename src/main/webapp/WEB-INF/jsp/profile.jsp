@@ -11,7 +11,7 @@
 <form action="authorization.html">
     <input type="submit" value="Change user" />
 </form>
-<form action="find-notebook.jsp">
+<form action="find">
     <input type="submit" value="Find notes" />
 </form>
 <form action="get">

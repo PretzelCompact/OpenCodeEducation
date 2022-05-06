@@ -1,19 +1,32 @@
-package stage3.notebook;
+package stage3.notebook.ControllersMVC;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import stage3.notebook.Record;
+import stage3.notebook.SessionController;
+import stage3.notebook.User;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class AuthorizationServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+@Controller
+public class UserController {
+    protected ClassPathXmlApplicationContext context;
+    public UserController(){
+        context = new ClassPathXmlApplicationContext("springContext.xml");
+    }
+
+    @GetMapping("/authorize")
+    public ModelAndView authorize(HttpServletRequest req, HttpServletResponse res){
         var username = req.getParameter("username");
-        var session = SessionController.getInstance().getSession();
+        //var session = SessionController.getInstance().getSession();
+        var session = context.getBean(HiberSessionController.class).getSession();
 
         //Находим пользователя по имени
         //Если не находится, то создаём нового
@@ -46,7 +59,9 @@ public class AuthorizationServlet extends HttpServlet {
         var hqlRemind = "from Record r where r.userId=:userId and remind=true";
         var transRemind = session.beginTransaction();
         var queryRemind = session.createQuery(hqlRemind, Record.class)
-                        .setParameter("userId", user.getId());
+                .setParameter("userId", user.getId());
+
+        var model = new ModelAndView("profile");
 
         var remindList = queryRemind.list();
         var recordsToShow = new ArrayList<Record>();
@@ -62,10 +77,11 @@ public class AuthorizationServlet extends HttpServlet {
                         }
                     });
             if(recordsToShow.size() > 0)
-                req.setAttribute("records", recordsToShow);
+                model.addObject("records", recordsToShow);
         }
         transRemind.commit();
 
-        getServletContext().getRequestDispatcher("/profile.jsp").forward(req,resp);
+        //getServletContext().getRequestDispatcher("/profile.jsp").forward(req,resp);
+        return model;
     }
 }

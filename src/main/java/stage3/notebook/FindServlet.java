@@ -72,15 +72,9 @@ public class FindServlet extends HttpServlet {
         records = query.list();
         trans.commit();
 
-        //Запихиваем id всех найденых записей в атрибут
+        //Запихиваем найденные записи в атрибут
+        req.setAttribute("records", records);
 
-        if (records != null && records.size() > 0) {
-            var sb = new StringBuilder();
-            records.stream().forEach(r -> {
-                sb.append(";" + r.getId());
-            });
-            req.setAttribute("records", sb.substring(1));
-        }
         getServletContext().getRequestDispatcher("/find-notebook.jsp").forward(req, resp);
     }
 }

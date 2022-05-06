@@ -47,7 +47,7 @@
         <input type="submit" value="Save" />
     </form>
 
-    <form action="delete">
+    <form method="POST" action="delete">
         <input type="hidden" name="recordId" value="${recordId}" />
         <input type="submit" value="Delete record" />
     </form>

@@ -6,56 +6,13 @@
          version="4.0">
 
     <servlet>
-        <servlet-name>calculator-servlet</servlet-name>
-        <servlet-class>stage3.calculator.CalculatorServlet</servlet-class>
+        <servlet-name>Dispatcher</servlet-name>
+        <servlet-class> org.springframework.web.servlet.DispatcherServlet </servlet-class>
+        <load-on-startup>1</load-on-startup>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>calculator-servlet</servlet-name>
-        <url-pattern>/calculator</url-pattern>
-    </servlet-mapping>
 
-    <servlet>
-        <servlet-name>authorization-servlet</servlet-name>
-        <servlet-class>stage3.notebook.AuthorizationServlet</servlet-class>
-    </servlet>
     <servlet-mapping>
-        <servlet-name>authorization-servlet</servlet-name>
-        <url-pattern>/authorize</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>savenote-servlet</servlet-name>
-        <servlet-class>stage3.notebook.SavenoteServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>savenote-servlet</servlet-name>
-        <url-pattern>/save</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>getnote-servlet</servlet-name>
-        <servlet-class>stage3.notebook.GetNoteServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>getnote-servlet</servlet-name>
-        <url-pattern>/get</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>deletenote-servlet</servlet-name>
-        <servlet-class>stage3.notebook.DeleteServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>deletenote-servlet</servlet-name>
-        <url-pattern>/delete</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>find-servlet</servlet-name>
-        <servlet-class>stage3.notebook.FindServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>find-servlet</servlet-name>
-        <url-pattern>/find</url-pattern>
+        <servlet-name>Dispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 </web-app>
